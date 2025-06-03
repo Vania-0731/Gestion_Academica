@@ -1,5 +1,5 @@
-# Etapa de build: usar Maven con OpenJDK 17
-FROM maven:3.9.3-openjdk-17-slim AS build
+# Etapa de construcción: usar Maven con OpenJDK 17
+FROM maven:3.8.4-openjdk-17-slim AS build
 
 WORKDIR /app
 
@@ -7,8 +7,8 @@ COPY . .
 
 RUN mvn clean package -DskipTests
 
-# Etapa de ejecución: usar Amazon Corretto 17 para correr la app
-FROM amazoncorretto:17
+# Etapa de ejecución: usar OpenJDK 17
+FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
