@@ -80,6 +80,7 @@
     </dependencies>
 
     <build>
+        <finalName>gestion-academica</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
