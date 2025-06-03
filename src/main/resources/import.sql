@@ -23,8 +23,8 @@ INSERT INTO creditos (nombre, descripcion, valor, estado) VALUES ('Gestión Empr
 INSERT INTO especialidades (nombre, descripcion, area_academica) VALUES ('Ingeniería de Software', 'Estudio del desarrollo y mantenimiento de sistemas de software.', 'Ingeniería');
 INSERT INTO especialidades (nombre, descripcion, area_academica) VALUES ('Administración de Negocios', 'Formación orientada a la gestión empresarial y toma de decisiones.', 'Administración');
 INSERT INTO especialidades (nombre, descripcion, area_academica) VALUES ('Enfermería', 'Preparación en el cuidado y atención integral de pacientes.', 'Salud');
-INSERT INTO especialidad (nombre, descripcion, area_academica) VALUES ('Administración de Empresas', 'Enseña gestión empresarial, recursos humanos y finanzas', 'Ciencias Empresariales');
-INSERT INTO especialidad (nombre, descripcion, area_academica) VALUES ('Contabilidad', 'Formación en contabilidad financiera y tributaria', 'Ciencias Empresariales');
+INSERT INTO especialidades (nombre, descripcion, area_academica) VALUES ('Administración de Empresas', 'Enseña gestión empresarial, recursos humanos y finanzas', 'Ciencias Empresariales');
+INSERT INTO especialidades (nombre, descripcion, area_academica) VALUES ('Contabilidad', 'Formación en contabilidad financiera y tributaria', 'Ciencias Empresariales');
 
 
 INSERT INTO apoderados (nombre, apellido, dni, telefono, direccion) VALUES ('Juan', 'Pérez', '12345678', '987654321', 'Av. Siempre Viva 123');
