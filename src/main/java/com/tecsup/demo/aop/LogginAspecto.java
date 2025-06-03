@@ -1,9 +1,6 @@
 package com.tecsup.demo.aop;
 
-import com.tecsup.demo.domain.entities.Alumno;
-import com.tecsup.demo.domain.entities.Auditoria;
-import com.tecsup.demo.domain.entities.Curso;
-import com.tecsup.demo.domain.entities.Docente;
+import com.tecsup.demo.domain.entities.*;
 import com.tecsup.demo.domain.persistence.AuditoriaDao;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -29,13 +26,13 @@ public class LogginAspecto {
 
     @Around("execution(* com.tecsup.demo.services.*ServiceImpl.*(..))")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        Object result =  null;
+        Object result = null;
         Long currTime = System.currentTimeMillis();
         tx = System.currentTimeMillis();
         Logger logger = LoggerFactory.getLogger(joinPoint.getTarget().getClass());
         String metodo = "tx[" + tx + "] - " + joinPoint.getSignature().getName();
-        //logger.info(metodo + "()");
-        if(joinPoint.getArgs().length > 0)
+
+        if (joinPoint.getArgs().length > 0)
             logger.info(metodo + "() INPUT:" + Arrays.toString(joinPoint.getArgs()));
         try {
             result = joinPoint.proceed();
@@ -55,33 +52,47 @@ public class LogginAspecto {
         Integer id = null;
         String tabla = null;
 
-        if(metodo.startsWith("guardar")){
+        if (metodo.startsWith("guardar")) {
             Object[] parametros = joinPoint.getArgs();
             Object obj = parametros[0];
-            if(obj instanceof Curso) {
-                Curso curso = (Curso) obj;
-                id = curso.getId();
+
+            if (obj instanceof Curso) {
+                id = ((Curso) obj).getId();
                 tabla = "cursos";
-            } else if(obj instanceof Alumno) {
-                Alumno alumno = (Alumno) obj;
-                id = alumno.getId();
+            } else if (obj instanceof Alumno) {
+                id = ((Alumno) obj).getId();
                 tabla = "alumnos";
-            } else if(obj instanceof Docente) {
-                Docente docente = (Docente) obj;
-                id = docente.getId();
+            } else if (obj instanceof Docente) {
+                id = ((Docente) obj).getId();
                 tabla = "docentes";
+            } else if (obj instanceof Apoderado) {
+                id = ((Apoderado) obj).getId();
+                tabla = "apoderados";
+            } else if (obj instanceof Credito) {
+                id = ((Credito) obj).getId();
+                tabla = "creditos";
+            } else if (obj instanceof Especialidad) {
+                id = ((Especialidad) obj).getId();
+                tabla = "especialidades";
             }
-        }
-        else if(metodo.startsWith("editar") || metodo.startsWith("eliminar")){
+
+        } else if (metodo.startsWith("editar") || metodo.startsWith("eliminar")) {
             Object[] parametros = joinPoint.getArgs();
             id = (Integer) parametros[0];
             String clase = joinPoint.getTarget().getClass().getSimpleName().toLowerCase();
-            if(clase.contains("curso")) {
+
+            if (clase.contains("curso")) {
                 tabla = "cursos";
-            } else if(clase.contains("alumno")) {
+            } else if (clase.contains("alumno")) {
                 tabla = "alumnos";
-            } else if(clase.contains("docente")) {
+            } else if (clase.contains("docente")) {
                 tabla = "docentes";
+            } else if (clase.contains("apoderado")) {
+                tabla = "apoderados";
+            } else if (clase.contains("credito")) {
+                tabla = "creditos";
+            } else if (clase.contains("especialidad")) {
+                tabla = "especialidades";
             }
         }
 
@@ -92,7 +103,6 @@ public class LogginAspecto {
                     "usuario", metodo));
         }
     }
-
 
 }
 
